@@ -307,7 +307,7 @@ class CascadeRCNN(BaseDetector, RPNTestMixin):
                                                   img_meta[0])
 
         cls_score = sum(ms_scores) / self.num_stages
-        det_bboxes, det_labels = self.bbox_head[-1].get_det_bboxes(
+        det_bboxes, det_labels, scores = self.bbox_head[-1].get_det_bboxes(
             rois,
             cls_score,
             bbox_pred,
@@ -361,7 +361,7 @@ class CascadeRCNN(BaseDetector, RPNTestMixin):
             else:
                 results = ms_bbox_result
 
-        return results
+        return det_bboxes, det_labels, scores
 
     def aug_test(self, img, img_meta, proposals=None, rescale=False):
         raise NotImplementedError
