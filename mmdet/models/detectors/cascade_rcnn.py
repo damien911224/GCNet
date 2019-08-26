@@ -84,6 +84,7 @@ class CascadeRCNN(BaseDetector, RPNTestMixin):
         self.test_cfg = test_cfg
 
         self.init_weights(pretrained=pretrained)
+        self.with_mask = False
 
     @property
     def with_rpn(self):
